@@ -38,7 +38,7 @@ window.addEventListener("scroll", function () {
       artist.innerHTML = "";
       cover.src = "album/senza_num.png";
     }
-    if (window.scrollY > 1300) {
+    if (window.scrollY > 850) {
       disc.innerHTML =
         '<span class="material-symbols-outlined">adjust</span> Disco 2: Il volo'; // Corretto
       cover.src = "album/senza_num_volo.png";
@@ -46,7 +46,7 @@ window.addEventListener("scroll", function () {
   } else {
     // Rimuovi la classe .small se lo scroll è sotto gli 0px
     albumContainer.classList.remove("small");
-    content.style.marginTop = "320px"; // Riporta il margin-top originale
+    content.style.marginTop = "220px"; // Riporta il margin-top originale
     if (window.scrollY < 100) {
       disc.innerHTML = ""; // Corretto
       title.innerHTML = "AEREO INTEREMOZIONALE";
