@@ -12,8 +12,9 @@
 
 /* Copertina dell'album */
 .album-cover {
-  width: 300px;
-  height: 300px;
+  width: 200px;
+  height: 200px;
+  transition: width 0.1s ease, height 0.1s ease;
   border-radius: 10px;
 }
 
@@ -21,6 +22,7 @@
 .album-title {
   font-size: 24px;
   margin-top: 20px;
+  transition: font-size 0.1s ease, margin-top 0.1s ease;
   color: #ebb12a;
   align-items: center;
   font-weight: bold;
@@ -28,6 +30,7 @@
 .album-disc {
   font-size: 24px;
   margin-top: 20px;
+  transition: font-size 0.1s ease, margin-top 0.1s ease;
   color: #ebb12a;
   align-items: center;
   font-weight: bold;
@@ -37,6 +40,7 @@
 .album-artist {
   font-size: 18px;
   margin-top: 10px;
+  transition: font-size 0.1s ease;
 }
 
 /* Stile per il contenuto sottostante */
@@ -44,6 +48,7 @@
   margin-top: 320px;
   padding: 50px;
   font-size: 18px;
+  transition: all 0.1s ease;
 }
 
 /* Quando l'utente scorre, la classe .small verrà aggiunta */
@@ -80,6 +85,7 @@
   z-index: 10;
   padding: 10px 0;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.1s ease;
 }
 
 .sticky-header.small {
