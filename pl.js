@@ -51,7 +51,7 @@ window.addEventListener("scroll", function () {
       disc.innerHTML = ""; // Corretto
       title.innerHTML = "AEREO INTEREMOZIONALE";
       artist.innerHTML = "larder";
-      cover.src = "album/copertinainter.png";
+      cover.src = "album/copPiccola.png";
     }
   }
 });
