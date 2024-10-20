@@ -178,6 +178,7 @@
     />
     <link href="stylealbum.css" rel="stylesheet" />
     <link href="footer.css" rel="stylesheet" />
+    <link href="video.css" rel="stylesheet" />
   </head>
   <body>
     <div class="album-container sticky-header" id="albumContainer">
@@ -630,15 +631,16 @@
           <!-- Aggiungi altre canzoni del secondo disco qui -->
         </ul>
       </div>
-      <iframe
-        id="youtubeVideo"
-        width="560"
-        height="315"
-        style="display: none"
-        frameborder="0"
-        allow="autoplay; encrypted-media"
-        allowfullscreen
-      ></iframe>
+      <div id="videoContainer" class="video-container">
+        <button class="close-button" id="closeVideo">&times;</button>
+        <iframe
+          id="youtubeVideo"
+          src="https://www.youtube.com/embed/VIDEO_ID"
+          frameborder="0"
+          allow="autoplay; encrypted-media"
+          allowfullscreen
+        ></iframe>
+      </div>
     </div>
 
     <footer>

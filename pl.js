@@ -55,3 +55,16 @@ window.addEventListener("scroll", function () {
     }
   }
 });
+
+// Funzione per aprire il video
+document.getElementById("openVideo").addEventListener("click", function () {
+  document.getElementById("videoContainer").style.display = "block";
+  document.getElementById("youtubeVideo").style.display = "block";
+});
+
+// Funzione per chiudere il video
+document.getElementById("closeVideo").addEventListener("click", function () {
+  document.getElementById("videoContainer").style.display = "none";
+  document.getElementById("youtubeVideo").style.display = "none"; // Nasconde l'iframe
+  document.getElementById("youtubeVideo").src = ""; // Ferma il video
+});

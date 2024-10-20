@@ -1,0 +1,20 @@
+/* Stili per il pulsante di chiusura */
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 1000; /* Assicurati che il pulsante sia sopra l'iframe */
+}
+
+/* Stile del contenitore del video */
+.video-container {
+  position: relative;
+  display: none; /* Nasconde il contenitore di default */
+  width: 560px;
+  height: 315px;
+}
