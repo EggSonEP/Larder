@@ -1,0 +1,12 @@
+footer {
+  background-color: #121212; /* Colore di sfondo */
+  color: #ebb12a; /* Colore del testo */
+  text-align: center; /* Centra il testo */
+  padding: 20px 0; /* Spaziatura interna */
+  position: relative; /* Puoi cambiare in fixed se desideri */
+}
+
+.copyright p {
+  margin: 5px 0; /* Margine per i paragrafi */
+  font-size: 14px; /* Dimensione del font */
+}
