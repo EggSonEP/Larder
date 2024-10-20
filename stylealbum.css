@@ -1,0 +1,96 @@
+/* Container principale */
+.album-container {
+  text-align: center;
+  padding: 20px;
+  transition: all 0.2s ease;
+  position: relative;
+  flex-direction: column; /* Imposta il layout iniziale in colonna */
+  background-color: #121212;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Copertina dell'album */
+.album-cover {
+  width: 300px;
+  height: 300px;
+  transition: width 0.2s ease, height 0.2s ease;
+  border-radius: 10px;
+}
+
+/* Titolo dell'album */
+.album-title {
+  font-size: 24px;
+  margin-top: 20px;
+  transition: font-size 0.2s ease, margin-top 0.2s ease;
+  color: #ebb12a;
+  align-items: center;
+  font-weight: bold;
+}
+.album-disc {
+  font-size: 24px;
+  margin-top: 20px;
+  transition: font-size 0.2s ease, margin-top 0.2s ease;
+  color: #ebb12a;
+  align-items: center;
+  font-weight: bold;
+}
+
+/* Nome dell'artista */
+.album-artist {
+  font-size: 18px;
+  margin-top: 10px;
+  transition: font-size 0.2s ease;
+}
+
+/* Stile per il contenuto sottostante */
+.content {
+  margin-top: 320px;
+  padding: 50px;
+  font-size: 18px;
+  transition: all 0.2s ease;
+}
+
+/* Quando l'utente scorre, la classe .small verrà aggiunta */
+.small .album-container {
+  align-items: center;
+}
+
+.small .album-cover {
+  width: 80px;
+  height: 80px;
+}
+
+.small .album-title {
+  font-size: 14px;
+  margin-top: 0; /* Rimuovi lo spazio superiore */
+}
+
+.small .album-disc {
+  font-size: 14px;
+  margin-top: 0; /* Rimuovi lo spazio superiore */
+}
+
+.small .album-artist {
+  font-size: 12px;
+  margin-top: 0; /* Rimuovi lo spazio superiore */
+}
+
+.sticky-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: fit-content;
+  z-index: 10;
+  padding: 10px 0;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+
+.sticky-header.small {
+  height: 100px;
+  height: fit-content;
+
+  padding: 10px 0;
+}

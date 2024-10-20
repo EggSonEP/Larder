@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Le Mie Canzoni - Elenco</title>
+    <style>
+      #youtubeVideo {
+        position: fixed; /* Fissa il video */
+        bottom: 20px; /* Distanza dal fondo */
+        right: 20px; /* Distanza da sinistra */
+        width: 300px; /* Larghezza del video */
+        height: auto; /* Altezza automatica per mantenere il rapporto */
+        display: none; /* Nascondi il video all'inizio */
+        z-index: 1000; /* Assicura che il video sia sopra altri elementi */
+      }
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #121212;
+        color: white;
+        padding: 20px;
+      }
+
+      h1,
+      h2 {
+        text-align: center;
+        color: #ebb12a;
+      }
+
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .song-list {
+        list-style-type: none;
+        padding: 0;
+      }
+
+      .song-list li {
+        display: flex;
+        align-items: center;
+        background-color: #181818;
+        padding: 15px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .song-list li img {
+        width: 64px;
+        height: 64px;
+        border-radius: 4px;
+        margin-right: 15px;
+      }
+
+      .song-details {
+        flex: 1;
+      }
+
+      .song-title {
+        display: inline-flex; /* Dispone gli elementi in orizzontale */
+        align-items: center; /* Allinea il testo e l'icona verticalmente */
+        gap: 5px; /* Spazio tra il titolo e l'icona */
+      }
+      .song-title .material-symbols-outlined {
+        font-size: 16px; /* Imposta la dimensione dell'icona più piccola */
+        color: #ebb12a;
+        margin-left: 5px;
+      }
+
+      .song-title p {
+        margin: 0; /* Rimuove il margine dal paragrafo per evitare spazi indesiderati */
+      }
+
+      .song-duration {
+        font-size: 14px;
+        color: #b3b3b3;
+        margin-left: 3px;
+        margin-right: 3px;
+      }
+
+      .play-button {
+        background-color: transparent;
+        color: #ebb12a;
+        border: none;
+        padding: 10px;
+        font-size: 14px;
+        cursor: pointer;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 40px;
+        height: 40px;
+      }
+
+      .play-button i {
+        font-size: 40px;
+        color: #ebb12a;
+      }
+
+      .song-list li:hover {
+        background-color: #282828;
+      }
+
+      /* Stile per i titoli dei dischi */
+      .disc-title {
+        margin-top: 40px;
+        font-size: 22px;
+        color: #ebb12a;
+        text-align: left;
+        display: inline-flex;
+        align-items: center;
+      }
+
+      .disc-title .material-symbols-outlined {
+        font-size: 26px;
+        margin-right: 10px;
+        color: #ebb12a;
+      }
+
+      .album-disc .material-symbols-outlined {
+        font-size: 10px;
+        margin-top: 7px;
+        color: #ebb12a;
+      }
+
+      /* Durata e badge allineati */
+      .duration-and-badges {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px; /* Spazio tra la durata e i badge */
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        padding: 2px 6px; /* Margini interni verticali (top e bottom) di 2px, orizzontali (left e right) di 6px */
+        font-size: 10px;
+        font-weight: bold;
+        background-color: #1db954; /* Colore di sfondo per i badge */
+        color: black; /* Colore del testo dei badge */
+        border-radius: 3px;
+        text-transform: uppercase;
+      }
+
+      .badge.recommended {
+        background-color: #eee6c9; /* Colore personalizzato per badge "Raccomandato" */
+      }
+
+      .badge.explicit {
+        background-color: #3c3b3b; /* Colore personalizzato per badge "Video" */
+        color: #eee6c9;
+      }
+      .badge.explicit .material-symbols-outlined {
+        font-size: 14px; /* Riduce la dimensione dell'icona */
+        vertical-align: middle; /* Allinea l'icona verticalmente */
+      }
+
+      .badge.video {
+        background-color: #ff5733; /* Colore personalizzato per badge "Video" */
+        color: #eee6c9;
+      }
+      .badge.video .material-symbols-outlined {
+        font-size: 14px; /* Riduce la dimensione dell'icona */
+        margin-right: 3px; /* Aggiunge un piccolo margine per distanziare il testo dall'icona */
+        vertical-align: middle; /* Allinea l'icona verticalmente */
+      }
+    </style>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+      rel="stylesheet"
+    />
+    <link href="stylealbum.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="album-container sticky-header" id="albumContainer">
+      <img
+        src="album/copertinainter.png"
+        alt="Album Cover"
+        class="album-cover"
+        id="albumCover"
+      />
+      <div class="album-title" id="albumTitle">AEREO INTEREMOZIONALE</div>
+      <div class="album-artist" id="albumArtist">larder</div>
+      <div class="album-disc" id="albumDisc"></div>
+    </div>
+    <div class="content" id="content">
+      <div class="container">
+        <!-- Disco 1: Le Origini -->
+        <h2 class="disc-title">
+          <span class="material-symbols-outlined"> adjust </span> Disco 1: La
+          partenza
+        </h2>
+        <ul class="song-list">
+          <li>
+            <img src="album/1.png" alt="Copertina Canzone 1" />
+            <div class="song-details">
+              <div class="song-title">
+                <p>1. L'AEREO INTEREMOZIONALE (Intro)</p>
+                <span class="material-symbols-outlined"> heart_check </span>
+              </div>
+              <div class="song-meta">
+                <div class="duration-and-badges">
+                  <p class="song-duration">4:20</p>
+                  <p class="song-duration">25 lug 2024</p>
+                </div>
+              </div>
+            </div>
+            <button class="play-button" id="PL1" onclick="pl1('Jf_S1wNZJCo')">
+              <span class="material-symbols-outlined"> play_circle </span>
+            </button>
+          </li>
+          <li>
+            <img src="album/2.png" alt="Copertina Canzone 2" />
+            <div class="song-details">
+              <div class="song-title">
+                <p>2. Bomba nucleare</p>
+                <span class="material-symbols-outlined"> heart_check </span>
+              </div>
+
+              <div class="song-meta">
+                <div class="duration-and-badges">
+                  <p class="song-duration">4:20</p>
+                  <p class="song-duration">25 lug 2024</p>
+                </div>
+              </div>
+            </div>
+            <button
+              class="play-button"
+              onclick="window.location.href='song.html?title=Canzone+2&video=bvOSu74ebJo&lyrics=Testo+di+Canzone+2&meaning=Significato+di+Canzone+2'"
+            >
+              <span class="material-symbols-outlined"> play_circle </span>
+            </button>
+          </li>
+
+          <li>
+            <img src="album/3.png" alt="Copertina Canzone 3" />
+            <div class="song-details">
+              <div class="song-title">
+                <p>3. da così a COSÌ (r1)</p>
+                <span class="material-symbols-outlined"> heart_check </span>
+              </div>
+
+              <div class="song-meta">
+                <div class="duration-and-badges">
+                  <p class="song-duration">4:20</p>
+                  <p class="song-duration">25 lug 2024</p>
+                </div>
+              </div>
+            </div>
+            <button
+              class="play-button"
+              onclick="window.location.href='song.html?title=Canzone+2&video=bvOSu74ebJo&lyrics=Testo+di+Canzone+2&meaning=Significato+di+Canzone+2'"
+            >
+              <span class="material-symbols-outlined"> play_circle </span>
+            </button>
+          </li>
+          <li>
+            <img src="album/4.png" alt="Copertina Canzone 4" />
+            <div class="song-details">
+              <div class="song-title">
+                <p>4. non perdere tempo</p>
+              </div>
+
+              <div class="song-meta">
+                <div class="duration-and-badges">
+                  <p class="song-duration">4:20</p>
+                  <p class="song-duration">25 lug 2024</p>
+                </div>
+              </div>
+            </div>
+            <button
+              class="play-button"
+              onclick="window.location.href='song.html?title=Canzone+2&video=bvOSu74ebJo&lyrics=Testo+di+Canzone+2&meaning=Significato+di+Canzone+2'"
+            >
+              <span class="material-symbols-outlined"> play_circle </span>
+            </button>
+          </li>
+          <li>
+            <img src="album/5.png" alt="Copertina Canzone 5" />
+            <div class="song-details">
+              <div class="song-title">
+                <p>5. è estate</p>
+              </div>
+
+              <div class="song-meta">
+                <div class="duration-and-badges">
+                  <span class="badge video"
+                    ><span class="material-symbols-outlined">
+                      smart_display
+                    </span>
+                    Video</span
+                  >
+                  <p class="song-duration">4:20</p>
+                  <p class="song-duration">25 lug 2024</p>
+                </div>
+              </div>
+            </div>
+            <button class="play-button" onclick="pl1('Jf_S1wNZJCo')">
+              <span class="material-symbols-outlined"> play_circle </span>
+            </button>
+          </li>
+          <li>
+            <img src="album/6.png" alt="Copertina Canzone 6" />
+            <div class="song-details">
+              <div class="song-title">
+                <p>6. Serena</p>
+                <span class="material-symbols-outlined"> heart_check </span>
+              </div>
+
+              <div class="song-meta">
+                <div class="duration-and-badges">
+                  <p class="song-duration">4:20</p>
+                  <p class="song-duration">25 lug 2024</p>
+                </div>
+              </div>
+            </div>
+            <button
+              class="play-button"
+              onclick="window.location.href='song.html?title=Canzone+2&video=bvOSu74ebJo&lyrics=Testo+di+Canzone+2&meaning=Significato+di+Canzone+2'"
+            >
+              <span class="material-symbols-outlined"> play_circle </span>
+            </button>
+          </li>
+          <li>
+            <img src="album/7.png" alt="Copertina Canzone 7" />
+            <div class="song-details">
+              <div class="song-title">
+                <p>7. come Peter Pan</p>
+                <span class="material-symbols-outlined"> heart_check </span>
+              </div>
+
+              <div class="song-meta">
+                <div class="duration-and-badges">
+                  <p class="song-duration">4:20</p>
+                  <p class="song-duration">25 lug 2024</p>
+                </div>
+              </div>
+            </div>
+            <button class="play-button" onclick="pl1('TDeetLsaAe8')">
+              <span class="material-symbols-outlined"> play_circle </span>
+            </button>
+          </li>
+          <!-- Aggiungi altre canzoni del primo disco qui -->
+          <li>
+            <img src="album/8.png" alt="Copertina Canzone 8" />
+            <div class="song-details">
+              <div class="song-title">
+                <p>8. un accordo (r2)</p>
+              </div>
+
+              <div class="song-meta">
+                <div class="duration-and-badges">
+                  <p class="song-duration">4:20</p>
+                  <p class="song-duration">25 lug 2024</p>
+                </div>
+              </div>
+            </div>
+            <button
+              class="play-button"
+              onclick="window.location.href='song.html?title=Canzone+2&video=bvOSu74ebJo&lyrics=Testo+di+Canzone+2&meaning=Significato+di+Canzone+2'"
+            >
+              <span class="material-symbols-outlined"> play_circle </span>
+            </button>
+          </li>
+          <li>
+            <img src="album/9.png" alt="Copertina Canzone 9" />
+            <div class="song-details">
+              <div class="song-title">
+                <p>9. SPARATO AL PETTO</p>
+              </div>
+
+              <div class="song-meta">
+                <div class="duration-and-badges">
+                  <span class="badge explicit"
+                    ><span class="material-symbols-outlined">
+                      explicit
+                    </span></span
+                  >
+                  <p class="song-duration">4:20</p>
+                  <p class="song-duration">25 lug 2024</p>
+                </div>
+              </div>
+            </div>
+            <button class="play-button" onclick="pl1('085QACuTJWs')">
+              <span class="material-symbols-outlined"> play_circle </span>
+            </button>
+          </li>
+          <li>
+            <img src="album/10.png" alt="Copertina Canzone 10" />
+            <div class="song-details">
+              <div class="song-title">
+                <p>10. FEDE (senza cacciavite)</p>
+              </div>
+
+              <div class="song-meta">
+                <div class="duration-and-badges">
+                  <p class="song-duration">4:20</p>
+                  <p class="song-duration">25 lug 2024</p>
+                </div>
+              </div>
+            </div>
+            <button class="play-button" onclick="pl1('XwN3zu-o82A')">
+              <span class="material-symbols-outlined"> play_circle </span>
+            </button>
+          </li>
+          <!-- Aggiungi altre canzoni del primo disco qui -->
+        </ul>
+
+        <!-- Disco 2: Evoluzione -->
+        <h2 class="disc-title">
+          <span class="material-symbols-outlined"> adjust </span> Disco 2: Il
+          volo
+        </h2>
+        <ul class="song-list">
+          <li>
+            <img src="album/v11.png" alt="Copertina Canzone 11" />
+            <div class="song-details">
+              <div class="song-title">
+                <p>1. VERDE D'INVIDIA</p>
+                <span class="material-symbols-outlined"> heart_check </span>
+              </div>
+
+              <div class="song-meta">
+                <div class="duration-and-badges">
+                  <span class="badge explicit"
+                    ><span class="material-symbols-outlined">
+                      explicit
+                    </span></span
+                  >
+                  <p class="song-duration">4:20</p>
+                  <p class="song-duration">25 lug 2024</p>
+                </div>
+              </div>
+            </div>
+            <button
+              class="play-button"
+              onclick="window.location.href='song.html?title=Canzone+3&video=jklmA56vDef&lyrics=Testo+di+Canzone+3&meaning=Significato+di+Canzone+3'"
+            >
+              <span class="material-symbols-outlined"> play_circle </span>
+            </button>
+          </li>
+          <li>
+            <img src="album/v12.png" alt="Copertina Canzone 12" />
+            <div class="song-details">
+              <div class="song-title">
+                <p>2. per non sembrare fragile</p>
+                <span class="material-symbols-outlined"> heart_check </span>
+              </div>
+
+              <div class="song-meta">
+                <div class="duration-and-badges">
+                  <p class="song-duration">4:20</p>
+                  <p class="song-duration">25 lug 2024</p>
+                </div>
+              </div>
+            </div>
+            <button
+              class="play-button"
+              onclick="window.location.href='song.html?title=Canzone+4&video=ghnLQ87wvH2&lyrics=Testo+di+Canzone+4&meaning=Significato+di+Canzone+4'"
+            >
+              <span class="material-symbols-outlined"> play_circle </span>
+            </button>
+          </li>
+          <li>
+            <img src="album/v13.png" alt="Copertina Canzone 13" />
+            <div class="song-details">
+              <div class="song-title">
+                <p>3. aspettiamo</p>
+                <span class="material-symbols-outlined"> heart_check </span>
+              </div>
+
+              <div class="song-meta">
+                <div class="duration-and-badges">
+                  <span class="badge explicit"
+                    ><span class="material-symbols-outlined">
+                      explicit
+                    </span></span
+                  >
+                  <p class="song-duration">4:20</p>
+                  <p class="song-duration">25 lug 2024</p>
+                </div>
+              </div>
+            </div>
+            <button
+              class="play-button"
+              onclick="window.location.href='song.html?title=Canzone+4&video=ghnLQ87wvH2&lyrics=Testo+di+Canzone+4&meaning=Significato+di+Canzone+4'"
+            >
+              <span class="material-symbols-outlined"> play_circle </span>
+            </button>
+          </li>
+          <li>
+            <img
+              src="https://via.placeholder.com/64"
+              alt="Copertina Canzone 4"
+            />
+            <div class="song-details">
+              <div class="song-title">
+                <p>4. nascondino (poker face)</p>
+                <span class="material-symbols-outlined"> heart_check </span>
+              </div>
+
+              <div class="song-meta">
+                <div class="duration-and-badges">
+                  <p class="song-duration">4:20</p>
+                  <p class="song-duration">25 lug 2024</p>
+                </div>
+              </div>
+            </div>
+            <button
+              class="play-button"
+              onclick="window.location.href='song.html?title=Canzone+4&video=ghnLQ87wvH2&lyrics=Testo+di+Canzone+4&meaning=Significato+di+Canzone+4'"
+            >
+              <span class="material-symbols-outlined"> play_circle </span>
+            </button>
+          </li>
+          <li>
+            <img
+              src="https://via.placeholder.com/64"
+              alt="Copertina Canzone 4"
+            />
+            <div class="song-details">
+              <div class="song-title">
+                <p>5. una vibrazione</p>
+                <span class="material-symbols-outlined"> heart_check </span>
+              </div>
+
+              <div class="song-meta">
+                <div class="duration-and-badges">
+                  <span class="badge video"
+                    ><span class="material-symbols-outlined">
+                      smart_display
+                    </span>
+                    Video</span
+                  >
+                  <p class="song-duration">4:20</p>
+                  <p class="song-duration">25 lug 2024</p>
+                </div>
+              </div>
+            </div>
+            <button class="play-button" onclick="pl1('bvOSu74ebJo')">
+              <span class="material-symbols-outlined"> play_circle </span>
+            </button>
+          </li>
+          <li>
+            <img
+              src="https://via.placeholder.com/64"
+              alt="Copertina Canzone 4"
+            />
+            <div class="song-details">
+              <div class="song-title">
+                <p>6. FILM A COLORI</p>
+                <span class="material-symbols-outlined"> heart_check </span>
+              </div>
+
+              <div class="song-meta">
+                <div class="duration-and-badges">
+                  <p class="song-duration">4:20</p>
+                  <p class="song-duration">25 lug 2024</p>
+                </div>
+              </div>
+            </div>
+            <button
+              class="play-button"
+              onclick="window.location.href='song.html?title=Canzone+4&video=ghnLQ87wvH2&lyrics=Testo+di+Canzone+4&meaning=Significato+di+Canzone+4'"
+            >
+              <span class="material-symbols-outlined"> play_circle </span>
+            </button>
+          </li>
+          <li>
+            <img
+              src="https://via.placeholder.com/64"
+              alt="Copertina Canzone 4"
+            />
+            <div class="song-details">
+              <div class="song-title">
+                <p>7. delicato fottuto algoritmo (DFA)</p>
+                <span class="material-symbols-outlined"> heart_check </span>
+              </div>
+
+              <div class="song-meta">
+                <div class="duration-and-badges">
+                  <span class="badge explicit"
+                    ><span class="material-symbols-outlined">
+                      explicit
+                    </span></span
+                  >
+                  <p class="song-duration">4:20</p>
+                  <p class="song-duration">25 lug 2024</p>
+                </div>
+              </div>
+            </div>
+            <button
+              class="play-button"
+              onclick="window.location.href='song.html?title=Canzone+4&video=ghnLQ87wvH2&lyrics=Testo+di+Canzone+4&meaning=Significato+di+Canzone+4'"
+            >
+              <span class="material-symbols-outlined"> play_circle </span>
+            </button>
+          </li>
+          <li>
+            <img
+              src="https://via.placeholder.com/64"
+              alt="Copertina Canzone 4"
+            />
+            <div class="song-details">
+              <div class="song-title">
+                <p>8. [BONUS] Eva RMX</p>
+                <span class="material-symbols-outlined"> heart_check </span>
+              </div>
+
+              <div class="song-meta">
+                <div class="duration-and-badges">
+                  <p class="song-duration">4:20</p>
+                  <p class="song-duration">25 lug 2024</p>
+                </div>
+              </div>
+            </div>
+            <button class="play-button" onclick="pl1('kUI31hMnU3A')">
+              <span class="material-symbols-outlined"> play_circle </span>
+            </button>
+          </li>
+
+          <!-- Aggiungi altre canzoni del secondo disco qui -->
+        </ul>
+      </div>
+      <iframe
+        id="youtubeVideo"
+        width="560"
+        height="315"
+        style="display: none"
+        frameborder="0"
+        allow="autoplay; encrypted-media"
+        allowfullscreen
+      ></iframe>
+    </div>
+
+    <script src="pl.js"></script>
+  </body>
+</html>
