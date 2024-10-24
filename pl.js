@@ -1,23 +1,3 @@
-function pl1(videoId) {
-  // Il video YouTube da aprire in Picture-in-Picture
-  const videoUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&enablejsapi=1`; // Aggiungi enablejsapi
-
-  const videoElement = document.getElementById("youtubeVideo");
-  videoElement.src = videoUrl;
-
-  // Mostra il video
-  videoElement.style.display = "block"; // Cambiato per mostrare il video
-
-  // Attiva Picture-in-Picture
-  videoElement
-    .requestPictureInPicture()
-    .then(() => {
-      // Il video parte automaticamente quando PiP è attivato
-    })
-    .catch((err) => {
-      console.error("Errore attivando PiP:", err);
-    });
-}
 // JavaScript per aggiungere e rimuovere la classe .small durante lo scroll
 window.addEventListener("scroll", function () {
   const albumContainer = document.getElementById("albumContainer");

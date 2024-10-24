@@ -1,0 +1,29 @@
+.audio-player {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #181818; /* Colore di sfondo del player */
+  color: white;
+  padding: 10px; /* Padding per il lettore */
+  display: flex; /* Disporre i bottoni in orizzontale */
+  align-items: center; /* Allineare verticalmente gli elementi */
+  justify-content: center; /* Centrare gli elementi */
+  box-shadow: 0px -2px 10px rgba(0, 0, 0, 0.5); /* Ombra per il lettore */
+}
+.control-button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  margin: 0 10px; /* Spazio tra i bottoni */
+}
+.progress {
+  margin: 0 10px; /* Spazio attorno alla barra di avanzamento */
+  flex: 1; /* Espande per occupare lo spazio disponibile */
+}
+
+#player {
+  display: none; /* Nascondi il video */
+}

@@ -179,6 +179,7 @@
     <link href="stylealbum.css" rel="stylesheet" />
     <link href="footer.css" rel="stylesheet" />
     <link href="video.css" rel="stylesheet" />
+    <link href="player.css" rel="stylesheet" />
   </head>
   <body>
     <div class="album-container sticky-header" id="albumContainer">
@@ -623,7 +624,7 @@
                 </div>
               </div>
             </div>
-            <button class="play-button" onclick="pl1('kUI31hMnU3A')">
+            <button class="play-button" onclick="loadTrack(17)">
               <span class="material-symbols-outlined"> play_circle </span>
             </button>
           </li>
@@ -643,6 +644,25 @@
       </div>
     </div>
 
+    <div id="player"></div>
+
+    <div id="audioPlayer" class="audio-player">
+      <button id="prevTrack" class="control-button">&#9664;&#9664;</button>
+      <button id="playPause" class="control-button">Play</button>
+      <button id="nextTrack" class="control-button" id="nextTrack">
+        &#9654;&#9654;
+      </button>
+      <input
+        type="range"
+        id="progress"
+        class="progress"
+        value="0"
+        step="1"
+        min="0"
+        max="100"
+      />
+    </div>
+
     <footer>
       <div class="copyright">
         <p>Copyright © 2024 larder. Tutti i diritti riservati.</p>
@@ -653,5 +673,7 @@
     </footer>
 
     <script src="pl.js"></script>
+    <script src="player.js"></script>
+    <script src="https://www.youtube.com/iframe_api"></script>
   </body>
 </html>
