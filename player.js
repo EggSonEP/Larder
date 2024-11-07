@@ -81,9 +81,9 @@ let isPlaying = false;
 function loadTrack(trackIndex) {
   const videoId = tracks[trackIndex].youtubeId;
   player.loadVideoById(videoId);
-  isPlaying = true;
+  isPlaying = false;
   const playPauseButton = document.getElementById("playPause");
-  playPauseButton.textContent = "pause"; // Icona "Pause"
+  playPauseButton.textContent = "play_arrow"; // Icona "Pause"
   playPauseButton.style.color = "#ebb12a"; // Colore dell'icona
   updateProgress(); // Inizializza la barra di avanzamento
 }
