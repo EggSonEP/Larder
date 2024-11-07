@@ -3,27 +3,58 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: #181818; /* Colore di sfondo del player */
+  background-color: #181818;
   color: white;
-  padding: 10px; /* Padding per il lettore */
-  display: flex; /* Disporre i bottoni in orizzontale */
-  align-items: center; /* Allineare verticalmente gli elementi */
-  justify-content: center; /* Centrare gli elementi */
-  box-shadow: 0px -2px 10px rgba(0, 0, 0, 0.5); /* Ombra per il lettore */
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px -2px 10px rgba(0, 0, 0, 0.5);
 }
+
 .control-button {
   background: none;
   border: none;
   color: white;
   font-size: 24px;
   cursor: pointer;
-  margin: 0 10px; /* Spazio tra i bottoni */
-}
-.progress {
-  margin: 0 10px; /* Spazio attorno alla barra di avanzamento */
-  flex: 1; /* Espande per occupare lo spazio disponibile */
+  margin: 0 10px;
 }
 
+.progress-container {
+  position: relative;
+  flex: 1;
+  margin: 0 10px;
+}
+
+.progress {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 8px;
+  border-radius: 5px;
+  outline: none;
+  background: linear-gradient(to right, #4e3a1d 0%, #ebb12a 0%);
+}
+
+.progress::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 0;
+  height: 0;
+}
+
+.progress::-moz-range-thumb {
+  width: 0;
+  height: 0;
+}
+
+.airplane-icon {
+  position: absolute;
+  top: -5px;
+  font-size: 20px;
+  color: #ebb12a; /* Colore giallo per l'aereo */
+  pointer-events: none;
+}
 #player {
   display: none; /* Nascondi il video */
 }
