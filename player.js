@@ -75,29 +75,36 @@ const tracks = [
 ];
 
 let currentTrackIndex = 0;
-let isPlaying = false;
+let isPlaying = false; // Il video parte in pausa
+const playPauseButton = document.getElementById("playPause");
+playPauseButton.textContent = "play_arrow"; // Icona di "Play" iniziale
+
+let updateProgressInterval; // Intervallo per aggiornare la progress bar
 
 // Funzione per caricare il video di YouTube
 function loadTrack(trackIndex) {
   const videoId = tracks[trackIndex].youtubeId;
   player.loadVideoById(videoId);
+
+  // Imposta lo stato su pausa inizialmente e aggiorna il pulsante
   isPlaying = false;
-  const playPauseButton = document.getElementById("playPause");
-  playPauseButton.textContent = "play_arrow"; // Icona "Pause"
+  playPauseButton.textContent = "play_arrow"; // Icona "Play"
   playPauseButton.style.color = "#ebb12a"; // Colore dell'icona
-  updateProgress(); // Inizializza la barra di avanzamento
+
+  // Ferma l'aggiornamento della barra di avanzamento finché non si riproduce il video
+  clearInterval(updateProgressInterval);
 }
 
 // Funzione per riprodurre o mettere in pausa il video
 function togglePlayPause() {
-  const playPauseButton = document.getElementById("playPause");
-
   if (isPlaying) {
     player.pauseVideo();
     playPauseButton.textContent = "play_arrow"; // Icona "Play"
+    clearInterval(updateProgressInterval); // Ferma l'aggiornamento della barra di avanzamento
   } else {
     player.playVideo();
     playPauseButton.textContent = "pause"; // Icona "Pause"
+    startProgressUpdate(); // Riavvia l'aggiornamento della barra di avanzamento
   }
 
   playPauseButton.style.color = "#ebb12a"; // Colore dell'icona
@@ -108,14 +115,25 @@ function togglePlayPause() {
 function playNextTrack() {
   currentTrackIndex = (currentTrackIndex + 1) % tracks.length; // Cicla le tracce
   loadTrack(currentTrackIndex);
+  isPlaying = true;
+  playPauseButton.textContent = "pause"; // Icona "Play"
 }
 
 // Funzione per riprodurre la traccia precedente
 function playPrevTrack() {
   currentTrackIndex = (currentTrackIndex - 1 + tracks.length) % tracks.length; // Cicla le tracce
   loadTrack(currentTrackIndex);
+  isPlaying = true;
+  playPauseButton.textContent = "pause"; // Icona "Play"
 }
 
+// Funzione per iniziare l'aggiornamento della progress bar
+function startProgressUpdate() {
+  clearInterval(updateProgressInterval); // Pulisci qualsiasi intervallo esistente
+  updateProgressInterval = setInterval(updateProgress, 200); // Aggiorna ogni 200ms
+}
+
+// Funzione per aggiornare la progress bar e la posizione dell'icona
 function updateProgress() {
   if (player && isPlaying) {
     const time = player.getCurrentTime();
