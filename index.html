@@ -166,7 +166,19 @@
         background-color: #ff5733; /* Colore personalizzato per badge "Video" */
         color: #eee6c9;
       }
+
+      .badge.lyrics {
+        background-color: #ebb12a; /* Colore personalizzato per badge "Video" */
+        color: #121212;
+      }
+
       .badge.video .material-symbols-outlined {
+        font-size: 10px; /* Riduce la dimensione dell'icona */
+        margin-right: 3px; /* Aggiunge un piccolo margine per distanziare il testo dall'icona */
+        vertical-align: middle; /* Allinea l'icona verticalmente */
+      }
+
+      .badge.lyrics .material-symbols-outlined {
         font-size: 10px; /* Riduce la dimensione dell'icona */
         margin-right: 3px; /* Aggiunge un piccolo margine per distanziare il testo dall'icona */
         vertical-align: middle; /* Allinea l'icona verticalmente */
@@ -210,6 +222,10 @@
               </div>
               <div class="song-meta">
                 <div class="duration-and-badges">
+                  <span class="badge lyrics" onclick="openvideo(0)">
+                    <span class="material-symbols-outlined">lyrics</span>
+                    Lyrics
+                  </span>
                   <p class="song-duration">2:20</p>
                   <p class="song-duration">17 giu 2023</p>
                 </div>
@@ -229,6 +245,10 @@
 
               <div class="song-meta">
                 <div class="duration-and-badges">
+                  <span class="badge lyrics" onclick="openvideo(1)">
+                    <span class="material-symbols-outlined">lyrics</span>
+                    Lyrics
+                  </span>
                   <p class="song-duration">2:24</p>
                   <p class="song-duration">31 ago 2023</p>
                 </div>
@@ -249,6 +269,10 @@
 
               <div class="song-meta">
                 <div class="duration-and-badges">
+                  <span class="badge lyrics" onclick="openvideo(2)">
+                    <span class="material-symbols-outlined">lyrics</span>
+                    Lyrics
+                  </span>
                   <p class="song-duration">2:49</p>
                   <p class="song-duration">2 giu 2023</p>
                 </div>
@@ -267,6 +291,10 @@
 
               <div class="song-meta">
                 <div class="duration-and-badges">
+                  <span class="badge lyrics" onclick="openvideo(3)">
+                    <span class="material-symbols-outlined">lyrics</span>
+                    Lyrics
+                  </span>
                   <p class="song-duration">2:52</p>
                   <p class="song-duration">20 ott 2023</p>
                 </div>
@@ -284,15 +312,17 @@
               </div>
 
               <div class="song-meta">
-                <div class="duration-and-badges">
-                  <span class="badge video"
-                    ><span class="material-symbols-outlined">
-                      smart_display
+                <div class="song-meta">
+                  <div class="duration-and-badges">
+                    <span class="badge video" onclick="openvideo(4)">
+                      <span class="material-symbols-outlined"
+                        >smart_display</span
+                      >
+                      Video
                     </span>
-                    Video</span
-                  >
-                  <p class="song-duration">2:59</p>
-                  <p class="song-duration">25 giu 2023</p>
+                    <p class="song-duration">2:59</p>
+                    <p class="song-duration">25 giu 2023</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -310,6 +340,10 @@
 
               <div class="song-meta">
                 <div class="duration-and-badges">
+                  <span class="badge lyrics" onclick="openvideo(5)">
+                    <span class="material-symbols-outlined">lyrics</span>
+                    Lyrics
+                  </span>
                   <p class="song-duration">2:26</p>
                   <p class="song-duration">19 gen 2024</p>
                 </div>
@@ -329,6 +363,10 @@
 
               <div class="song-meta">
                 <div class="duration-and-badges">
+                  <span class="badge lyrics" onclick="openvideo(6)">
+                    <span class="material-symbols-outlined">lyrics</span>
+                    Lyrics
+                  </span>
                   <p class="song-duration">2:28</p>
                   <p class="song-duration">19 nov 2023</p>
                 </div>
@@ -349,6 +387,10 @@
 
               <div class="song-meta">
                 <div class="duration-and-badges">
+                  <span class="badge lyrics" onclick="openvideo(7)">
+                    <span class="material-symbols-outlined">lyrics</span>
+                    Lyrics
+                  </span>
                   <p class="song-duration">2:30</p>
                   <p class="song-duration">4 giu 2024</p>
                 </div>
@@ -372,6 +414,10 @@
                       explicit
                     </span></span
                   >
+                  <span class="badge lyrics" onclick="openvideo(8)">
+                    <span class="material-symbols-outlined">lyrics</span>
+                    Lyrics
+                  </span>
                   <p class="song-duration">3:12</p>
                   <p class="song-duration">13 feb 2024</p>
                 </div>
@@ -390,7 +436,7 @@
 
               <div class="song-meta">
                 <div class="duration-and-badges">
-                  <span class="badge video"
+                  <span class="badge video" onclick="openvideo(9)"
                     ><span class="material-symbols-outlined">
                       smart_display
                     </span>
@@ -428,7 +474,10 @@
                     ><span class="material-symbols-outlined">
                       explicit
                     </span></span
-                  >
+                  ><span class="badge lyrics" onclick="openvideo(10)">
+                    <span class="material-symbols-outlined">lyrics</span>
+                    Lyrics
+                  </span>
                   <p class="song-duration">2:19</p>
                   <p class="song-duration">23 mag 2024</p>
                 </div>
@@ -448,6 +497,10 @@
 
               <div class="song-meta">
                 <div class="duration-and-badges">
+                  <span class="badge lyrics" onclick="openvideo(11)">
+                    <span class="material-symbols-outlined">lyrics</span>
+                    Lyrics
+                  </span>
                   <p class="song-duration">3:06</p>
                   <p class="song-duration">7 lug 2024</p>
                 </div>
@@ -472,6 +525,10 @@
                       explicit
                     </span></span
                   >
+                  <span class="badge lyrics" onclick="openvideo(12)">
+                    <span class="material-symbols-outlined">lyrics</span>
+                    Lyrics
+                  </span>
                   <p class="song-duration">2:29</p>
                   <p class="song-duration">5 ago 2024</p>
                 </div>
@@ -491,6 +548,10 @@
 
               <div class="song-meta">
                 <div class="duration-and-badges">
+                  <span class="badge lyrics" onclick="openvideo(13)">
+                    <span class="material-symbols-outlined">lyrics</span>
+                    Lyrics
+                  </span>
                   <p class="song-duration">3:17</p>
                   <p class="song-duration">24 lug 2024</p>
                 </div>
@@ -510,7 +571,7 @@
 
               <div class="song-meta">
                 <div class="duration-and-badges">
-                  <span class="badge video"
+                  <span class="badge video" onclick="openvideo(14)"
                     ><span class="material-symbols-outlined">
                       smart_display
                     </span>
@@ -535,6 +596,10 @@
 
               <div class="song-meta">
                 <div class="duration-and-badges">
+                  <span class="badge lyrics" onclick="openvideo(15)">
+                    <span class="material-symbols-outlined">lyrics</span>
+                    Lyrics
+                  </span>
                   <p class="song-duration">3:56</p>
                   <p class="song-duration">25 set 2024</p>
                 </div>
@@ -559,6 +624,10 @@
                       explicit
                     </span></span
                   >
+                  <span class="badge lyrics" onclick="openvideo(16)">
+                    <span class="material-symbols-outlined">lyrics</span>
+                    Lyrics
+                  </span>
                   <p class="song-duration">2:25</p>
                   <p class="song-duration">16 ott 2024</p>
                 </div>
@@ -578,6 +647,10 @@
 
               <div class="song-meta">
                 <div class="duration-and-badges">
+                  <span class="badge lyrics" onclick="openvideo(17)">
+                    <span class="material-symbols-outlined">lyrics</span>
+                    Lyrics
+                  </span>
                   <p class="song-duration">2:40</p>
                   <p class="song-duration">25 lug 2024</p>
                 </div>

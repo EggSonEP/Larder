@@ -94,3 +94,7 @@
 
   padding: 10px 0;
 }
+/* Colore giallo per il testo attivo */
+.active-track {
+  color: #ebb12a; /* Colore giallo */
+}

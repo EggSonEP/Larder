@@ -86,13 +86,42 @@ function loadTrack(trackIndex) {
   const videoId = tracks[trackIndex].youtubeId;
   player.loadVideoById(videoId);
 
-  // Imposta lo stato su pausa inizialmente e aggiorna il pulsante
-  isPlaying = false;
-  playPauseButton.textContent = "play_arrow"; // Icona "Play"
+  // Rimuovi la classe `active-track` da tutti i brani
+  const allTracks = document.querySelectorAll(".song-title p, .song-duration");
+  allTracks.forEach((track) => track.classList.remove("active-track"));
+
+  // Aggiungi la classe `active-track` agli elementi della traccia attiva
+  const activeTitle = document.querySelector(
+    `li:nth-child(${trackIndex + 1}) .song-title p`
+  );
+  const activeDuration = document.querySelector(
+    `li:nth-child(${trackIndex + 1}) .song-meta .song-duration:first-child`
+  );
+  const activeDate = document.querySelector(
+    `li:nth-child(${trackIndex + 1}) .song-meta .song-duration:last-child`
+  );
+
+  currentTrackIndex = trackIndex;
+  activeTitle.classList.add("active-track");
+  activeDuration.classList.add("active-track");
+  activeDate.classList.add("active-track");
+
+  // Aggiorna lo stato di riproduzione e il pulsante
+  isPlaying = true;
+  const playPauseButton = document.getElementById("playPause");
+  playPauseButton.textContent = "pause"; // Icona "Pause"
   playPauseButton.style.color = "#ebb12a"; // Colore dell'icona
 
-  // Ferma l'aggiornamento della barra di avanzamento finché non si riproduce il video
-  clearInterval(updateProgressInterval);
+  // Avvia la riproduzione
+  player.playVideo();
+  startProgressUpdate();
+}
+
+// Funzione per aprire il video specifico su YouTube
+function openvideo(trackIndex) {
+  const videoId = tracks[trackIndex].youtubeId; // Ottieni l'ID YouTube della traccia
+  const url = `https://www.youtube.com/watch?v=${videoId}`;
+  window.open(url, "_blank");
 }
 
 // Funzione per riprodurre o mettere in pausa il video
@@ -165,6 +194,8 @@ function setProgress(event) {
   const duration = player.getDuration();
   const newTime = (event.target.value / 100) * duration;
   player.seekTo(newTime);
+  isPlaying = true;
+  playPauseButton.textContent = "pause"; // Icona "Play"
 }
 
 // Aggiungi eventi ai bottoni
@@ -186,9 +217,6 @@ function onYouTubeIframeAPIReady() {
     width: "640",
     videoId: tracks[currentTrackIndex].youtubeId,
     events: {
-      onReady: function (event) {
-        loadTrack(currentTrackIndex); // Carica la prima traccia
-      },
       onStateChange: function (event) {
         if (event.data === YT.PlayerState.ENDED) {
           playNextTrack(); // Passa alla traccia successiva alla fine
